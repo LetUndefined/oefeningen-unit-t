@@ -208,6 +208,74 @@
             color: #c62828;
         }
 
+        .study-mode {
+            padding: 40px;
+        }
+
+        .study-filter {
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .study-filter select {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            background: white;
+            color: #333;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .study-question {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .study-question h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .study-options {
+            margin: 15px 0;
+        }
+
+        .study-option {
+            padding: 8px 0;
+            margin: 5px 0;
+        }
+
+        .study-option.correct {
+            background: #d4f4dd;
+            padding: 8px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .study-feedback {
+            background: #e8f4ff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-style: italic;
+        }
+
+        .category-badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
+            margin-bottom: 10px;
+        }
+
         .start-screen {
             text-align: center;
             padding: 40px;
@@ -282,6 +350,7 @@
                     <option value="tv">📺 Oefen - TV & STB</option>
                     <option value="telephone">📞 Oefen - Telefonie</option>
                     <option value="calculation">🧮 Oefen - Rekenen</option>
+                    <option value="study">📖 Studeer - Alle vragen met antwoorden</option>
                 </select>
             </div>
 
@@ -306,6 +375,25 @@
             <p id="resultMessage"></p>
             <button class="btn" onclick="restartQuiz()">Opnieuw Proberen</button>
             <button class="btn" onclick="reviewAnswers()">Bekijk Antwoorden</button>
+        </div>
+
+        <div class="study-mode" id="studyScreen" style="display: none;">
+            <h2>📖 Studiemodus - Alle vragen met antwoorden</h2>
+            <div class="study-filter">
+                <label for="studyCategoryFilter">Filter per categorie:</label>
+                <select id="studyCategoryFilter" onchange="filterStudyQuestions()">
+                    <option value="all">Alle categorieën</option>
+                    <option value="general">Algemeen & Procedures</option>
+                    <option value="electricity">Elektriciteit & Veiligheid</option>
+                    <option value="network">Netwerk & Coax</option>
+                    <option value="wifi">WiFi & Internet</option>
+                    <option value="tv">TV & STB</option>
+                    <option value="telephone">Telefonie</option>
+                    <option value="calculation">Rekenen</option>
+                </select>
+            </div>
+            <div id="studyContent"></div>
+            <button class="btn" onclick="backToHome()">Terug naar Home</button>
         </div>
     </div>
 

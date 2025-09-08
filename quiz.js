@@ -911,6 +911,12 @@ function initQuiz() {
 function startQuiz() {
     const category = document.getElementById('categorySelect').value;
     
+    // Check for study mode
+    if (category === 'study') {
+        showStudyMode();
+        return;
+    }
+    
     // Check if exam mode
     isExamMode = (category === 'exam');
     
@@ -1225,6 +1231,80 @@ function reviewAnswers() {
     document.getElementById('resultsScreen').style.display = 'none';
     document.getElementById('quizContainer').style.display = 'block';
     displayQuestion();
+}
+
+// Show Study Mode
+function showStudyMode() {
+    document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('quizContainer').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'none';
+    document.getElementById('studyScreen').style.display = 'block';
+    
+    displayStudyQuestions('all');
+}
+
+// Display Study Questions
+function displayStudyQuestions(categoryFilter) {
+    const studyContent = document.getElementById('studyContent');
+    let questions = quizQuestions;
+    
+    if (categoryFilter !== 'all') {
+        questions = quizQuestions.filter(q => q.category === categoryFilter);
+    }
+    
+    const categoryNames = {
+        'general': 'Algemeen & Procedures',
+        'electricity': 'Elektriciteit & Veiligheid',
+        'network': 'Netwerk & Coax',
+        'wifi': 'WiFi & Internet',
+        'tv': 'TV & STB',
+        'telephone': 'Telefonie',
+        'calculation': 'Rekenen'
+    };
+    
+    let html = '';
+    questions.forEach((question, index) => {
+        html += `
+            <div class="study-question">
+                <div class="category-badge">${categoryNames[question.category]}</div>
+                <h3>Vraag ${index + 1}: ${question.question}</h3>
+                <div class="study-options">
+        `;
+        
+        question.options.forEach((option, optionIndex) => {
+            const isCorrect = question.type === 'multiple' ? 
+                question.correct.includes(optionIndex) : 
+                question.correct === optionIndex;
+            
+            html += `
+                <div class="study-option ${isCorrect ? 'correct' : ''}">
+                    ${isCorrect ? '✓ ' : ''}${option}
+                </div>
+            `;
+        });
+        
+        html += `
+                </div>
+                <div class="study-feedback">
+                    💡 ${question.feedback}
+                </div>
+            </div>
+        `;
+    });
+    
+    studyContent.innerHTML = html;
+}
+
+// Filter Study Questions
+function filterStudyQuestions() {
+    const selectedCategory = document.getElementById('studyCategoryFilter').value;
+    displayStudyQuestions(selectedCategory);
+}
+
+// Back to Home
+function backToHome() {
+    document.getElementById('studyScreen').style.display = 'none';
+    document.getElementById('startScreen').style.display = 'block';
 }
 
 // Initialize on page load
