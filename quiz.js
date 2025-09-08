@@ -1819,30 +1819,60 @@ function backToHome() {
 
 // Show Search Mode
 function showSearchMode() {
+    console.log('showSearchMode called'); // Debug log
     document.getElementById('startScreen').style.display = 'none';
     document.getElementById('quizContainer').style.display = 'none';
     document.getElementById('resultsScreen').style.display = 'none';
     document.getElementById('studyScreen').style.display = 'none';
-    document.getElementById('searchScreen').style.display = 'block';
+    
+    const searchScreen = document.getElementById('searchScreen');
+    console.log('searchScreen element:', searchScreen); // Debug log
+    if (searchScreen) {
+        searchScreen.style.display = 'block';
+    }
     
     // Clear previous search results
-    document.getElementById('searchResults').innerHTML = '';
-    document.getElementById('searchInput').value = '';
-    document.getElementById('searchCategoryFilter').value = 'all';
-    
-    // Add event listener for Enter key in search input
+    const searchResults = document.getElementById('searchResults');
     const searchInput = document.getElementById('searchInput');
-    searchInput.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            searchQuestions();
-        }
-    });
+    const searchCategoryFilter = document.getElementById('searchCategoryFilter');
+    
+    if (searchResults) searchResults.innerHTML = '';
+    if (searchInput) {
+        searchInput.value = '';
+        // Remove existing event listener to prevent duplicates
+        searchInput.removeEventListener('keypress', handleSearchEnter);
+        // Add event listener for Enter key
+        searchInput.addEventListener('keypress', handleSearchEnter);
+    }
+    if (searchCategoryFilter) searchCategoryFilter.value = 'all';
+}
+
+// Handle Enter key in search input
+function handleSearchEnter(e) {
+    if (e.key === 'Enter') {
+        searchQuestions();
+    }
 }
 
 // Search Questions
 function searchQuestions() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
-    const categoryFilter = document.getElementById('searchCategoryFilter').value;
+    console.log('searchQuestions called'); // Debug log
+    const searchInput = document.getElementById('searchInput');
+    const categoryFilterElement = document.getElementById('searchCategoryFilter');
+    
+    console.log('searchInput:', searchInput); // Debug log
+    console.log('categoryFilterElement:', categoryFilterElement); // Debug log
+    
+    if (!searchInput) {
+        console.error('Search input element not found');
+        return;
+    }
+    
+    const searchTerm = searchInput.value.toLowerCase().trim();
+    const categoryFilter = categoryFilterElement ? categoryFilterElement.value : 'all';
+    
+    console.log('searchTerm:', searchTerm); // Debug log
+    console.log('categoryFilter:', categoryFilter); // Debug log
     
     if (searchTerm === '') {
         alert('Voer een zoekterm in!');
