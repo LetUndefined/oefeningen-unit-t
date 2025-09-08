@@ -379,6 +379,88 @@ const quizQuestions = [
     },
     {
         category: "network",
+        question: "Welke acties voer je uit als je een kabelaansluiting moet uitvoeren zonder producten bij een grondnet?",
+        type: "multiple",
+        options: [
+            "Ik mag enkel de KA uitvoeren als de klant thuis is",
+            "Een f-connector plaatsen",
+            "Een SAP-ID aanbrengen",
+            "De dropkabel tot aan de tap brengen",
+            "Dropkabel dan aansluiten met antidieffilter + massascheider"
+        ],
+        correct: [1, 2, 3, 4],
+        feedback: "De dropkabel tot aan de tap brengen, een f-connector plaatsen, een SAP-ID aanbrengen, dropkabel dan aansluiten met antidieffilter + massascheider."
+    },
+    {
+        category: "network",
+        question: "Welke acties voer je uit als je een kabelaansluiting moet uitvoeren met producten bij een luchtnet?",
+        type: "multiple",
+        options: [
+            "De dropkabel aansluiten met de juiste filter (TOF/RPA)",
+            "Een f-connector plaatsen",
+            "De andere bestelde producten installeren",
+            "De dropkabel tot aan de tap brengen",
+            "Een SAP-ID aanbrengen"
+        ],
+        correct: [0, 1, 2, 3, 4],
+        feedback: "De dropkabel tot aan de tap brengen, een f-connector plaatsen, een SAP-ID aanbrengen, de dropkabel aansluiten met de juiste filter (TOF/RPA), de andere bestelde producten installeren."
+    },
+    {
+        category: "network",
+        question: "Wat is altijd de kostprijs van een kabelaansluiting?",
+        type: "single",
+        options: ["€30", "€50", "€75", "€100"],
+        correct: 1,
+        feedback: "De kostprijs van een kabelaansluiting is altijd €50."
+    },
+    {
+        category: "network",
+        question: "Welk SAP ID is correct? Onze klant woont op huisnummer 10 bus 4. Dit appartement bevindt zich op de 2de verdieping (Telenet gebied)?",
+        type: "single",
+        options: ["10-2/456", "10/2-456", "10/4-456", "10/2/456"],
+        correct: 1,
+        feedback: "Het correcte SAP ID is 10/2-456. Formaat: huisnummer/verdieping-gebied."
+    },
+    {
+        category: "network",
+        question: "Welke type boor is dit voor steenwerk?",
+        type: "single",
+        options: ["Een ijzerboor", "Een houtboor", "Een klopboor", "Een steenboor"],
+        correct: 3,
+        feedback: "Dit is een steenboor voor boren in steen en beton."
+    },
+    {
+        category: "electricity",
+        question: "Tijdens het boren met de klopboormachine moet ik mijn gehoorbescherming dragen.",
+        type: "single",
+        options: ["True", "False"],
+        correct: 0,
+        feedback: "Ja, bij gebruik van een klopboormachine moet je altijd gehoorbescherming dragen."
+    },
+    {
+        category: "network",
+        question: "Bij voorkeur doe je de boring...",
+        type: "single",
+        options: ["Van buiten naar binnen toe", "Van binnen naar buiten toe"],
+        correct: 0,
+        feedback: "Bij voorkeur boor je van buiten naar binnen toe."
+    },
+    {
+        category: "network",
+        question: "Bij een gevelboring...",
+        type: "multiple",
+        options: [
+            "Noteer je op je eKC dat de klant verantwoordelijk is voor eventuele schade die veroorzaakt wordt door het boren",
+            "Gebruik ik de nodige PBM's",
+            "Heb ik aandacht voor gevoelige gevelstenen",
+            "Gebruik ik mijn leidingzoeker",
+            "Stuur ik een SOS Fieldcoach zodat deze het gat kan komen boren"
+        ],
+        correct: [0, 1, 2, 3],
+        feedback: "Bij gevelboring gebruik je de nodige PBM's, leidingzoeker, noteer schade-verantwoordelijkheid en heb aandacht voor gevoelige gevelstenen."
+    },
+    {
+        category: "network",
         question: "Hoeveel verzwakt een 4-weg splitter?",
         type: "single",
         options: ["7,2 dB", "4 dB", "3,6 dB", "12 dB"],
@@ -398,6 +480,39 @@ const quizQuestions = [
         ],
         correct: 1,
         feedback: "Ingress bevindt zich tussen 5MHz en 65MHz (upstream frequenties)."
+    },
+    {
+        category: "network",
+        question: "Hoe controleer je of de klant zijn installatie vrij is van ingress?",
+        type: "single",
+        options: [
+            "Je meet aan de NIU zijde",
+            "Je sluit je Deviser aan op het punt zo dicht mogelijk bij het Telenetnetwerk (tapzijde)",
+            "Je meet alleen aan de modem",
+            "Je koppelt eerst alles los van de klant"
+        ],
+        correct: 1,
+        feedback: "Je sluit je Deviser aan op het punt zo dicht mogelijk bij het Telenetnetwerk, dus aan de tapzijde van de dropkabel. Laat de volledige RF van de klant aangesloten en de NIU onder spanning."
+    },
+    {
+        category: "network",
+        question: "Bij gebruik van QAM256 tov QAM64 zal er meer data verstuurd kunnen worden en hogere snelheden gehaald worden, maar minder zekerheid of de data correct aankomt.",
+        type: "single",
+        options: ["True", "False"],
+        correct: 0,
+        feedback: "Bij hogere modulatie (QAM256) kan meer data verstuurd worden en hogere snelheden gehaald worden, maar er is minder zekerheid of de data correct aankomt en meer impact van instraling/ingress."
+    },
+    {
+        category: "network",
+        question: "Via Ants merk je 7 downstream kanalen in 'Partial Service'. Welke actie onderneem je?",
+        type: "single",
+        options: [
+            "Vervang de oude TOF filter door een TOF-ITC. Onder de 334 MHz zijn er nu docsis kanalen toegevoegd. Als de klant iDTV wenst plaatsen we geen TOF-ITC filter.",
+            "Geen enkele actie, dit is normaal want analoge TV is verdwenen op de kabel.",
+            "Deze klant heeft duidelijk een HP110 MHz filter, neem deze weg voor een betere upstream."
+        ],
+        correct: 0,
+        feedback: "Vervang de oude TOF filter door een TOF-ITC. Onder de 334 MHz zijn er nu docsis kanalen toegevoegd. Als de klant iDTV wenst plaatsen we geen TOF-ITC filter."
     },
 
     // WiFi & Internet Questions
@@ -926,8 +1041,8 @@ function startQuiz() {
         const categories = ['general', 'electricity', 'network', 'wifi', 'tv', 'telephone', 'calculation'];
         const questionsPerCategory = {
             'general': 6,
-            'electricity': 6,
-            'network': 4,
+            'electricity': 7,
+            'network': 6,
             'wifi': 5,
             'tv': 2,
             'telephone': 2,
