@@ -299,6 +299,62 @@
             margin-bottom: 10px;
         }
 
+        .search-container {
+            margin-bottom: 30px;
+        }
+
+        .search-input-container {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            align-items: center;
+        }
+
+        .search-input-container input {
+            flex: 1;
+            padding: 12px 15px;
+            font-size: 1em;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            background: white;
+            color: #333;
+        }
+
+        .search-input-container input:focus {
+            outline: none;
+            border-color: #5a67d8;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .search-filters {
+            text-align: center;
+        }
+
+        .search-filters select {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            background: white;
+            color: #333;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .search-results-count {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #666;
+            font-style: italic;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            color: #666;
+            font-size: 1.1em;
+        }
+
         .start-screen {
             text-align: center;
             padding: 40px;
@@ -375,11 +431,21 @@
                 font-size: 0.95em;
             }
             
-            .category-select select, .study-filter select {
+            .category-select select, .study-filter select, .search-filters select {
                 width: 100%;
                 max-width: none;
                 margin: 10px 0;
                 padding: 12px 15px;
+            }
+
+            .search-input-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .search-input-container input {
+                width: 100%;
+                margin-bottom: 10px;
             }
             
             .score {
@@ -545,6 +611,7 @@
                     <option value="telephone">📞 Oefen - Telefonie</option>
                     <option value="calculation">🧮 Oefen - Rekenen</option>
                     <option value="study">📖 Studeer - Alle vragen met antwoorden</option>
+                    <option value="search">🔍 Zoeken - Zoek specifieke vragen</option>
                 </select>
             </div>
 
@@ -587,6 +654,31 @@
                 </select>
             </div>
             <div id="studyContent"></div>
+            <button class="btn" onclick="backToHome()">Terug naar Home</button>
+        </div>
+
+        <div class="study-mode" id="searchScreen" style="display: none;">
+            <h2>🔍 Zoekfunctie - Vind specifieke vragen</h2>
+            <div class="search-container">
+                <div class="search-input-container">
+                    <input type="text" id="searchInput" placeholder="Zoek met sleutelwoorden... (bijv. 'modem wifi', 'IP adres', 'spanning berekenen')" />
+                    <button class="btn" onclick="searchQuestions()">Zoeken</button>
+                </div>
+                <div class="search-filters">
+                    <label for="searchCategoryFilter">Filter per categorie:</label>
+                    <select id="searchCategoryFilter">
+                        <option value="all">Alle categorieën</option>
+                        <option value="general">Algemeen & Procedures</option>
+                        <option value="electricity">Elektriciteit & Veiligheid</option>
+                        <option value="network">Netwerk & Coax</option>
+                        <option value="wifi">WiFi & Internet</option>
+                        <option value="tv">TV & STB</option>
+                        <option value="telephone">Telefonie</option>
+                        <option value="calculation">Rekenen</option>
+                    </select>
+                </div>
+            </div>
+            <div id="searchResults"></div>
             <button class="btn" onclick="backToHome()">Terug naar Home</button>
         </div>
     </div>

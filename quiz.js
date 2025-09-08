@@ -1421,6 +1421,12 @@ function startQuiz() {
         return;
     }
     
+    // Check for search mode
+    if (category === 'search') {
+        showSearchMode();
+        return;
+    }
+    
     // Check if exam mode
     isExamMode = (category === 'exam');
     
@@ -1809,6 +1815,186 @@ function filterStudyQuestions() {
 function backToHome() {
     document.getElementById('studyScreen').style.display = 'none';
     document.getElementById('startScreen').style.display = 'block';
+}
+
+// Show Search Mode
+function showSearchMode() {
+    document.getElementById('startScreen').style.display = 'none';
+    document.getElementById('quizContainer').style.display = 'none';
+    document.getElementById('resultsScreen').style.display = 'none';
+    document.getElementById('studyScreen').style.display = 'none';
+    document.getElementById('searchScreen').style.display = 'block';
+    
+    // Clear previous search results
+    document.getElementById('searchResults').innerHTML = '';
+    document.getElementById('searchInput').value = '';
+    document.getElementById('searchCategoryFilter').value = 'all';
+    
+    // Add event listener for Enter key in search input
+    const searchInput = document.getElementById('searchInput');
+    searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            searchQuestions();
+        }
+    });
+}
+
+// Search Questions
+function searchQuestions() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+    const categoryFilter = document.getElementById('searchCategoryFilter').value;
+    
+    if (searchTerm === '') {
+        alert('Voer een zoekterm in!');
+        return;
+    }
+    
+    let questions = quizQuestions;
+    
+    // Filter by category if not "all"
+    if (categoryFilter !== 'all') {
+        questions = questions.filter(q => q.category === categoryFilter);
+    }
+    
+    // Split search term into individual words
+    const searchWords = searchTerm.split(/\s+/).filter(word => word.length > 1);
+    
+    // Score questions based on relevance
+    const scoredResults = questions.map(question => {
+        const questionText = question.question.toLowerCase();
+        const optionsText = question.options.join(' ').toLowerCase();
+        const feedbackText = question.feedback.toLowerCase();
+        const allText = [questionText, optionsText, feedbackText].join(' ');
+        
+        let score = 0;
+        let matchedWords = [];
+        
+        searchWords.forEach(word => {
+            // Exact word matches get higher score
+            const exactMatches = (allText.match(new RegExp(`\\b${word}\\b`, 'g')) || []).length;
+            score += exactMatches * 10;
+            
+            // Partial matches get lower score
+            const partialMatches = (allText.match(new RegExp(word, 'g')) || []).length - exactMatches;
+            score += partialMatches * 3;
+            
+            // Word found in question title gets bonus
+            if (questionText.includes(word)) {
+                score += 5;
+                matchedWords.push(word);
+            }
+            
+            // Word found in correct answer gets bonus
+            const correctAnswers = question.type === 'multiple' 
+                ? question.correct.map(i => question.options[i]).join(' ').toLowerCase()
+                : question.options[question.correct].toLowerCase();
+            if (correctAnswers.includes(word)) {
+                score += 3;
+                matchedWords.push(word);
+            }
+        });
+        
+        return {
+            question,
+            score,
+            matchedWords: [...new Set(matchedWords)] // Remove duplicates
+        };
+    })
+    .filter(result => result.score > 0) // Only include questions with matches
+    .sort((a, b) => b.score - a.score); // Sort by relevance (highest score first)
+    
+    const searchResults = scoredResults.map(result => result.question);
+    displaySearchResults(searchResults, searchWords.join(' '));
+}
+
+// Display Search Results
+function displaySearchResults(results, searchTerm) {
+    const searchResultsDiv = document.getElementById('searchResults');
+    
+    const categoryNames = {
+        'general': 'Algemeen & Procedures',
+        'electricity': 'Elektriciteit & Veiligheid',
+        'network': 'Netwerk & Coax',
+        'wifi': 'WiFi & Internet',
+        'tv': 'TV & STB',
+        'telephone': 'Telefonie',
+        'calculation': 'Rekenen'
+    };
+    
+    if (results.length === 0) {
+        searchResultsDiv.innerHTML = `
+            <div class="no-results">
+                <h3>Geen resultaten gevonden</h3>
+                <p>Probeer een andere zoekterm of kies een andere categorie.</p>
+                <p>Zoektips:</p>
+                <ul style="text-align: left; max-width: 500px; margin: 0 auto;">
+                    <li>Gebruik sleutelwoorden zoals "modem", "kabel", "spanning", "WiFi"</li>
+                    <li>Combineer woorden: "IP adres", "modem vervangen", "elektriciteit meten"</li>
+                    <li>Zoek op antwoorden: "True", "False", specifieke waardes</li>
+                    <li>Probeer verschillende termen: "internet" of "netwerk", "stroom" of "elektriciteit"</li>
+                    <li>Filter op categorie voor betere resultaten</li>
+                </ul>
+            </div>
+        `;
+        return;
+    }
+    
+    // Add results count
+    let html = `<div class="search-results-count">
+        ${results.length} resultaten gevonden voor "${searchTerm}"
+    </div>`;
+    
+    results.forEach((question, index) => {
+        html += `
+            <div class="study-question">
+                <div class="category-badge">${categoryNames[question.category]}</div>
+                <h3>Vraag ${index + 1}: ${highlightSearchTerm(question.question, searchTerm)}</h3>
+                <div class="study-options">
+        `;
+        
+        question.options.forEach((option, optionIndex) => {
+            const isCorrect = question.type === 'multiple' ? 
+                question.correct.includes(optionIndex) : 
+                question.correct === optionIndex;
+            
+            html += `
+                <div class="study-option ${isCorrect ? 'correct' : ''}">
+                    ${isCorrect ? '✓ ' : ''}${highlightSearchTerm(option, searchTerm)}
+                </div>
+            `;
+        });
+        
+        html += `
+                </div>
+                <div class="study-feedback">
+                    💡 ${highlightSearchTerm(question.feedback, searchTerm)}
+                </div>
+            </div>
+        `;
+    });
+    
+    searchResultsDiv.innerHTML = html;
+}
+
+// Highlight Search Terms
+function highlightSearchTerm(text, searchTerm) {
+    if (!searchTerm || searchTerm.length < 2) return text;
+    
+    // Split search term into words and highlight each
+    const searchWords = searchTerm.split(/\s+/).filter(word => word.length > 1);
+    let highlightedText = text;
+    
+    searchWords.forEach(word => {
+        // Highlight whole words first (higher priority)
+        const wholeWordRegex = new RegExp(`\\b(${word})\\b`, 'gi');
+        highlightedText = highlightedText.replace(wholeWordRegex, '<mark style="background-color: #fff3cd; padding: 2px 4px; border-radius: 3px; font-weight: bold;">$1</mark>');
+        
+        // Then highlight partial matches that aren't already highlighted
+        const partialRegex = new RegExp(`(?<!<mark[^>]*>.*?)(${word})(?!.*?</mark>)`, 'gi');
+        highlightedText = highlightedText.replace(partialRegex, '<mark style="background-color: #e8f4f8; padding: 1px 2px; border-radius: 2px;">$1</mark>');
+    });
+    
+    return highlightedText;
 }
 
 // Initialize on page load
