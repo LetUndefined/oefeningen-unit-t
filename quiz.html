@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit-T Training Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .progress-bar {
+            background: rgba(255,255,255,0.3);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .progress {
+            background: white;
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .quiz-container {
+            padding: 40px;
+        }
+
+        .question-number {
+            color: #667eea;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .question {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .option {
+            padding: 20px;
+            background: #f7f7f7;
+            border: 2px solid transparent;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .option:hover {
+            background: #e8e8e8;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            background: #e8f4ff;
+            border-color: #667eea;
+        }
+
+        .option.correct {
+            background: #d4f4dd;
+            border-color: #4caf50;
+        }
+
+        .option.incorrect {
+            background: #ffebee;
+            border-color: #f44336;
+        }
+
+        .option input[type="radio"],
+        .option input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .feedback.correct {
+            background: #d4f4dd;
+            color: #2e7d32;
+        }
+
+        .feedback.incorrect {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #5a67d8;
+            transform: translateY(-2px);
+        }
+
+        .btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-check {
+            background: #4caf50;
+        }
+
+        .btn-check:hover {
+            background: #45a049;
+        }
+
+        .results {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .results h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .score {
+            font-size: 3em;
+            font-weight: bold;
+            color: #667eea;
+            margin: 20px 0;
+        }
+
+        .exam-info {
+            background: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border-left: 4px solid #ffc107;
+        }
+
+        .pass-badge {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .pass-badge.passed {
+            background: #d4f4dd;
+            color: #2e7d32;
+        }
+
+        .pass-badge.failed {
+            background: #ffebee;
+            color: #c62828;
+        }
+
+        .start-screen {
+            text-align: center;
+            padding: 40px;
+        }
+
+        .start-screen h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .start-screen p {
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .category-select {
+            margin: 20px 0;
+        }
+
+        .category-select select {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: 2px solid #667eea;
+            border-radius: 5px;
+            background: white;
+            color: #333;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.5em;
+            }
+            
+            .quiz-container {
+                padding: 20px;
+            }
+            
+            .buttons {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Unit-T Training Quiz</h1>
+            <div class="progress-bar">
+                <div class="progress" id="progressBar"></div>
+            </div>
+        </div>
+
+        <div class="start-screen" id="startScreen">
+            <h2>Welkom bij de Unit-T Training Quiz</h2>
+            <p>Test je kennis met deze uitgebreide quiz over verschillende onderwerpen zoals elektriciteit, netwerken, telefonie, en veiligheid.</p>
+            
+            <div class="exam-info">
+                <strong>🎯 Toets Modus:</strong> 30 willekeurige vragen uit alle categorieën. Je hebt <strong>80% nodig om te slagen</strong> (minimaal 24 van de 30 vragen correct).
+            </div>
+            
+            <div class="category-select">
+                <label for="categorySelect">Kies een modus:</label>
+                <select id="categorySelect">
+                    <option value="exam">🎯 Toets (30 vragen - 80% om te slagen)</option>
+                    <option value="all">📚 Oefen - Alle vragen</option>
+                    <option value="general">📋 Oefen - Algemeen & Procedures</option>
+                    <option value="electricity">⚡ Oefen - Elektriciteit & Veiligheid</option>
+                    <option value="network">🔌 Oefen - Netwerk & Coax</option>
+                    <option value="wifi">📶 Oefen - WiFi & Internet</option>
+                    <option value="tv">📺 Oefen - TV & STB</option>
+                    <option value="telephone">📞 Oefen - Telefonie</option>
+                    <option value="calculation">🧮 Oefen - Rekenen</option>
+                </select>
+            </div>
+
+            <button class="btn" onclick="startQuiz()">Start</button>
+        </div>
+
+        <div class="quiz-container" id="quizContainer" style="display: none;">
+            <div class="question-number" id="questionNumber"></div>
+            <div class="question" id="questionText"></div>
+            <div class="options" id="optionsContainer"></div>
+            <div class="feedback" id="feedback"></div>
+            <div class="buttons">
+                <button class="btn" id="prevBtn" onclick="previousQuestion()">Vorige</button>
+                <button class="btn btn-check" id="checkBtn" onclick="checkAnswer()">Controleer</button>
+                <button class="btn" id="nextBtn" onclick="nextQuestion()">Volgende</button>
+            </div>
+        </div>
+
+        <div class="results" id="resultsScreen" style="display: none;">
+            <h2>Quiz Voltooid!</h2>
+            <div class="score" id="finalScore"></div>
+            <p id="resultMessage"></p>
+            <button class="btn" onclick="restartQuiz()">Opnieuw Proberen</button>
+            <button class="btn" onclick="reviewAnswers()">Bekijk Antwoorden</button>
+        </div>
+    </div>
+
+    <script src="quiz.js"></script>
+</body>
+</html>
