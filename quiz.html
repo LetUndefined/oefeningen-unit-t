@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Unit-T Training Quiz</title>
     <style>
         * {
@@ -16,6 +16,9 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            touch-action: manipulation;
         }
 
         .container {
@@ -83,11 +86,24 @@
             border-radius: 10px;
             cursor: pointer;
             transition: all 0.3s ease;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            user-select: none;
         }
 
-        .option:hover {
+        .option:hover, .option:active {
             background: #e8e8e8;
             transform: translateX(5px);
+        }
+
+        @media (max-width: 768px) {
+            .option:hover {
+                transform: none;
+            }
+            
+            .option:active {
+                background: #ddd;
+                transform: scale(0.98);
+            }
         }
 
         .option.selected {
@@ -143,11 +159,18 @@
             cursor: pointer;
             font-size: 1em;
             transition: all 0.3s ease;
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+            user-select: none;
         }
 
         .btn:hover {
             background: #5a67d8;
             transform: translateY(-2px);
+        }
+
+        .btn:active {
+            background: #4c51bf;
+            transform: translateY(0);
         }
 
         .btn:disabled {
@@ -307,16 +330,187 @@
         }
 
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 1.5em;
+            body {
+                padding: 10px;
             }
             
-            .quiz-container {
-                padding: 20px;
+            .container {
+                border-radius: 10px;
+                box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            }
+            
+            .header {
+                padding: 20px 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.4em;
+                margin-bottom: 8px;
+            }
+            
+            .quiz-container, .start-screen, .results, .study-mode {
+                padding: 20px 15px;
+            }
+            
+            .question {
+                font-size: 1.1em;
+                margin-bottom: 20px;
+                line-height: 1.5;
+            }
+            
+            .option {
+                padding: 15px;
+                margin-bottom: 10px;
+                font-size: 0.95em;
             }
             
             .buttons {
                 flex-direction: column;
+                gap: 10px;
+            }
+            
+            .btn {
+                width: 100%;
+                padding: 12px 20px;
+                font-size: 0.95em;
+            }
+            
+            .category-select select, .study-filter select {
+                width: 100%;
+                max-width: none;
+                margin: 10px 0;
+                padding: 12px 15px;
+            }
+            
+            .score {
+                font-size: 2.5em;
+            }
+            
+            .exam-info {
+                padding: 12px;
+                font-size: 0.9em;
+            }
+            
+            .study-question {
+                padding: 15px;
+                margin-bottom: 15px;
+            }
+            
+            .study-question h3 {
+                font-size: 1em;
+                margin-bottom: 12px;
+            }
+            
+            .study-option {
+                padding: 6px 0;
+                font-size: 0.9em;
+            }
+            
+            .study-option.correct {
+                padding: 6px 8px;
+            }
+            
+            .study-feedback {
+                padding: 8px;
+                font-size: 0.85em;
+            }
+            
+            .category-badge {
+                font-size: 0.7em;
+                padding: 3px 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+            
+            .container {
+                border-radius: 5px;
+            }
+            
+            .header {
+                padding: 15px 10px;
+            }
+            
+            .header h1 {
+                font-size: 1.2em;
+            }
+            
+            .quiz-container, .start-screen, .results, .study-mode {
+                padding: 15px 10px;
+            }
+            
+            .question {
+                font-size: 1em;
+                margin-bottom: 15px;
+            }
+            
+            .option {
+                padding: 12px;
+                font-size: 0.9em;
+            }
+            
+            .btn {
+                padding: 10px 15px;
+                font-size: 0.9em;
+            }
+            
+            .score {
+                font-size: 2em;
+            }
+            
+            .study-question {
+                padding: 12px;
+            }
+            
+            .study-question h3 {
+                font-size: 0.95em;
+                margin-bottom: 10px;
+            }
+            
+            .study-feedback {
+                font-size: 0.8em;
+            }
+            
+            .progress-bar {
+                height: 8px;
+            }
+        }
+
+        @media (max-width: 320px) {
+            .header h1 {
+                font-size: 1.1em;
+            }
+            
+            .question {
+                font-size: 0.95em;
+            }
+            
+            .option {
+                padding: 10px;
+                font-size: 0.85em;
+                margin-bottom: 8px;
+            }
+            
+            .btn {
+                padding: 8px 12px;
+                font-size: 0.85em;
+            }
+            
+            .study-question {
+                padding: 10px;
+                margin-bottom: 12px;
+            }
+            
+            .study-question h3 {
+                font-size: 0.9em;
+            }
+            
+            .category-badge {
+                font-size: 0.65em;
+                padding: 2px 6px;
             }
         }
     </style>
