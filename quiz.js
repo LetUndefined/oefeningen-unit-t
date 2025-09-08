@@ -590,6 +590,19 @@ const quizQuestions = [
     },
     {
         category: "wifi",
+        question: "Wanneer plaatsen we steeds een Wi-Fi powerline kit bij de klant?",
+        type: "single",
+        options: [
+            "Wanneer de STB dient aangesloten te worden met UTP, ook al staat de modem in dezelfde ruimte en is zijn bereik voldoende",
+            "Wanneer de klant hierom vraagt voor zijn buren",
+            "Wanneer het bereik van de modem (HGW) onvoldoende is en er een UTP-kabel van aan de modem aanwezig is",
+            "Enkel op repair wanneer het bereik van de modem (HGW) onvoldoende is, er geen UTP-kabel van de modem aanwezig is en de klant het licht niet inziet van plumepods plaats ik deze basis hardware"
+        ],
+        correct: 3,
+        feedback: "Enkel op repair wanneer het bereik van de modem (HGW) onvoldoende is, er geen UTP-kabel van de modem aanwezig is en de klant het licht niet inziet van plumepods plaats ik deze basis hardware."
+    },
+    {
+        category: "wifi",
         question: "Hoeveel is 800 kB/sec uitgedrukt in Mbps?",
         type: "single",
         options: ["80 Mbps", "64 Mbps", "6,4 Mbps", "8 Mbps"],
@@ -659,6 +672,116 @@ const quizQuestions = [
         options: ["5 GHz", "7 GHz", "2,4 GHz", "2,4 GHz en 5 GHz"],
         correct: 0,
         feedback: "802.11ac werkt alleen op 5 GHz."
+    },
+    {
+        category: "wifi",
+        question: "Wat kan het gevolg zijn van bv. een normaal werkende mobiele telefoon die met een AP verbonden is op de rand van het bereik?",
+        type: "single",
+        options: [
+            "Alle antwoorden zijn correct",
+            "De verbinding van andere toestellen wordt verbroken",
+            "De verbinding van alle andere toestellen kan aanzienlijk trager zijn",
+            "Het AP verandert van kanaal"
+        ],
+        correct: 2,
+        feedback: "De verbinding van alle andere toestellen kan aanzienlijk trager zijn."
+    },
+    {
+        category: "wifi",
+        question: "Welke uitspraak is juist i.v.m. Wap's en Pods?",
+        type: "multiple",
+        options: [
+            "Er is weinig verschil tussen het installeren van Wap's en Pods, het voornaamste verschil is dat de Pods superieur zijn t.o.v de waps",
+            "De connectie kan via UTP maar ook via Mesh(wifi) en is niet alleen intelligent maar ook zelf controlerend en optimaliserend. De pods bewaken constant de apparaten en stuurt deze zodat de beleving van de klant optimaal is",
+            "De connectie tot de acces points (IHC 1.0) loopt via UTP of PWL, deze acces points zenden op hun beurt wifi uit zonder rekening te houden met de positie van de apparaten of belasting van het netwerk",
+            "Plume Pods plaatsen we vaak dichter bij elkaar tegen de binnenmuren van het huis. Indien je een pod verder moet plaatsen is het interessant om deze te verbinden met UTP met de modem"
+        ],
+        correct: [1, 2, 3],
+        feedback: "De connectie kan via UTP/Mesh en is intelligent/optimalisserend. Acces points (IHC 1.0) via UTP/PWL zonder rekening te houden met apparaten. Pods dichter bij elkaar tegen binnenmuren."
+    },
+    {
+        category: "wifi",
+        question: "Welk IP-adres krijgt een computer via UTP of WiFi van een HGW modem (ongeacht provisioneringsstatus)?",
+        type: "single",
+        options: ["172.16.1.xxx", "172.16.0.xxx", "169.254.xxx.xxx", "192.168.0.xxx", "192.168.1.xxx"],
+        correct: 3,
+        feedback: "Op een HGW modem krijg je via UTP en WiFi steeds een 192.168.x.x IP adres. De provisioneringsstatus heeft geen invloed op het IP adres bij een HGW modem."
+    },
+    {
+        category: "wifi",
+        question: "Wat is voor PC1 de 'Default gateway'?",
+        type: "single",
+        options: ["WM (HGW)", "CCAP", "TFTP Server", "Node"],
+        correct: 0,
+        feedback: "De HGW (modem) is de default gateway voor PC1."
+    },
+    {
+        category: "wifi",
+        question: "Wat is de beste verkorte weergave van volgend IPv6 adres: 2001:0db8:0000:0000:b450:0000:0000:00b4?",
+        type: "single",
+        options: ["2001:db8::b450::b4", "2001:db8:0:0:b45::b4", "2001:db8::b45:0000:0000:b4", "2001:db8::b450:0:0:b4"],
+        correct: 3,
+        feedback: "IPv6 (128 bit) hexadecimaal. Leading nullen mogen weggelaten worden. 1x mag een segment nullen weggelaten worden."
+    },
+    {
+        category: "wifi",
+        question: "Welke analysetool gebruiken we voor de instellingen van een Powerline na te kijken en/of aan te passen?",
+        type: "single",
+        options: ["C@fé", "Spot", "De online tool van de fabrikant", "Ants", "Smartfix"],
+        correct: 1,
+        feedback: "We gebruiken Spot om powerline instellingen te bekijken en aan te passen."
+    },
+    {
+        category: "wifi",
+        question: "We stellen het Wi-Fi kanaal in op kanaal 124. Wat zijn hiervan de gevolgen?",
+        type: "single",
+        options: [
+            "De modem zal, in het geval hij op kanaal 124 blijft staan, 1 Watt vermogen uitsturen",
+            "De modem kan plots op een ander kanaal staan bv. ch36",
+            "Alle antwoorden zijn correct",
+            "De klant moet bij herstart van de modem 10 min wachten voor hij via Wi-Fi kan verbinden op de 5 GHz band"
+        ],
+        correct: 2,
+        feedback: "Alle antwoorden zijn correct bij DFS kanaal 124."
+    },
+    {
+        category: "wifi",
+        question: "Hoeveel 2,4 GHz wifi kanalen ondersteunt onze Mercury v1 (WM3.0)? En hoeveel zijn er in de Europese standaard beschikbaar?",
+        type: "single",
+        options: [
+            "14 kanalen beschikbaar, WM3.0 ondersteunt er 13",
+            "13 kanalen beschikbaar, WM3.0 ondersteunt er 13",
+            "13 kanalen beschikbaar, WM3.0 ondersteunt er 11",
+            "11 kanalen beschikbaar, WM3.0 ondersteunt er 11"
+        ],
+        correct: 2,
+        feedback: "13 kanalen beschikbaar in Europa, WM3.0 ondersteunt er 11."
+    },
+    {
+        category: "wifi",
+        question: "De klant heeft een Marakele modem. Hoe zorg je ervoor dat de klant het fixed IP op zijn router krijgt?",
+        type: "single",
+        options: [
+            "Het eerste toestel dat een IP adres aanvraagd zal het Fixed IP krijgen + MAC-bridging inschakelen in SPOT",
+            "Het HFC MAC adres van de modem ingeven via 'Mijn telenet' + MAC-bridging inschakelen in SPOT",
+            "Het MAC adres van de LAN poort van de modem ingeven via 'Mijn telenet' + MAC-bridging inschakelen in SPOT",
+            "Het MAC adres van het toestel dat het fixed IP moet krijgen ingeven via MAC-bridging in SPOT"
+        ],
+        correct: 3,
+        feedback: "Het MAC adres van het toestel dat het fixed IP moet krijgen ingeven via MAC-bridging in SPOT."
+    },
+    {
+        category: "wifi",
+        question: "Welke van onderstaande adressen is een geldig IPv6 adres?",
+        type: "single",
+        options: [
+            "2001:0DB8:0000:0000:0230:0BAE:5670:CA7F",
+            "2013:0G02::897:9A37",
+            "2003:0BC8:0230:1234:5670:1234",
+            "2007::89AD:1287:73CD::0B08"
+        ],
+        correct: 0,
+        feedback: "IPv6 (128 bit) hexadecimaal. Leading nullen mogen weggelaten worden. 1x mag een segment nullen weggelaten worden."
     },
 
     // TV & STB Questions
