@@ -1,6 +1,6 @@
 # Unit-T Training Quiz
 
-Een interactieve quiz applicatie voor Unit-T training met 110 vragen over elektriciteit, netwerken, veiligheid en meer.
+Een interactieve quiz applicatie voor Unit-T training met 135 vragen over elektriciteit, netwerken, veiligheid en meer.
 
 ## 🚀 Live Demo
 **[Start de quiz hier!](https://letundefined.github.io/oefeningen-unit-t/quiz.html)**
@@ -11,15 +11,15 @@ Een interactieve quiz applicatie voor Unit-T training met 110 vragen over elektr
 - 📖 **Studiemodus** - bekijk alle vragen met antwoorden
 - ✅ Direct feedback bij antwoorden
 - 📊 Score tracking
-- 🧮 110 vragen in 7 categorieën
+- 🧮 135 vragen in 7 categorieën
 
 ## Categorieën
-- **Algemeen & Procedures** (13 vragen)
+- **Algemeen & Procedures** (14 vragen)
 - **Elektriciteit & Veiligheid** (24 vragen)  
-- **Netwerk & Coax** (18 vragen)
+- **Netwerk & Coax** (33 vragen)
 - **WiFi & Internet** (25 vragen)
-- **TV & STB** (3 vragen)
-- **Telefonie** (3 vragen)
+- **TV & STB** (10 vragen)
+- **Telefonie** (5 vragen)
 - **Rekenen & Conversies** (24 vragen)
 
 ## Gebruik

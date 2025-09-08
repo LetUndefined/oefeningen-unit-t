@@ -819,6 +819,86 @@ const quizQuestions = [
         correct: 2,
         feedback: "Voor iDTV: tussen -8dBmV en +13dBmV met een BER < 1E-5"
     },
+    {
+        category: "tv",
+        question: "Één van de vier tuners geeft een serieuze afwijking weer in het service menu. Hoe kunnen we dit oplossen?",
+        type: "single",
+        options: [
+            "De STB is niet interactief, dit kan storingen veroorzaken op de tuner",
+            "De HDMI-kabel is van slechte kwaliteit, de klant zal deze moeten vervangen",
+            "In dit geval zal je 2 STB's moeten afmelden. Eén als Return NOK en één als geïnstalleerd",
+            "Er is een slecht contact aanwezig op de installatie, we zullen alle connecties moeten nakijken"
+        ],
+        correct: 2,
+        feedback: "In dit geval zal je 2 STB's moeten afmelden. Eén als Return NOK en één als geïnstalleerd."
+    },
+    {
+        category: "tv",
+        question: "Er is wel nog beeld op de TV, maar het menu en de zapbalk zijn niet meer zichtbaar op de HD DC (AD2200). Wat is de oorzaak?",
+        type: "single",
+        options: [
+            "Een instelling van de TV is niet correct",
+            "De STB is defect",
+            "De kabel tussen de TV en de STB is defect",
+            "Een instelling van de STB staat verkeerd",
+            "De STB is aangesloten via SCART en HDMI op hetzelfde moment"
+        ],
+        correct: 4,
+        feedback: "De STB is aangesloten via SCART en HDMI op hetzelfde moment."
+    },
+    {
+        category: "tv",
+        question: "Hoe kun je het service menu openen op een EOS STB?",
+        type: "single",
+        options: [
+            "Via deze toetsten op de display: Back + Pijltje naar boven",
+            "Via deze toetsen op de remote 'up / up / left / ... / right / right'",
+            "Via een spraakcommando op de remote",
+            "Via deze toetsen op de remote 'up / up / ... / left / right / right'",
+            "Via deze toetsten op de display: Back + Pijltje naar links"
+        ],
+        correct: 1,
+        feedback: "Via deze toetsen op de remote 'up / up / left / ... / right / right'"
+    },
+    {
+        category: "tv",
+        question: "In welke range ligt het IP-adres van een Sipadan? We zoeken een IP-adres dat zorgt voor de interactiviteit.",
+        type: "single",
+        options: [
+            "10.140.X.X - 10.180.X.X",
+            "192.160.X.X - 192.200.X.X",
+            "192.168.81.82 - 192.168.81.83",
+            "10.160.X.X - 10.200.X.X"
+        ],
+        correct: 3,
+        feedback: "Het IP-adres van een Sipadan ligt tussen 10.160.X.X - 10.200.X.X"
+    },
+    {
+        category: "tv",
+        question: "De klant heeft recent wat zitten wijzigen aan de instellingen op zijn Telenet TV Box. De TV-Gids is plots volledig gewijzigd en staat super groot. Wat kan je ondernemen?",
+        type: "single",
+        options: [
+            "Ik voer een Factory Reset uit op de Telenet TV Box",
+            "Ik sluit de Telenet TV Box via Scart aan",
+            "Ik ga naar de instellingen op de televisie en zet de HDMI UHD Color setting uit",
+            "Ik wijzig de resolutie van de Telenet TV Box naar 720p",
+            "Ik ga naar de instellingen en zet 'TV gids voor blinden en slechtzienden' op Uit"
+        ],
+        correct: 4,
+        feedback: "Ga naar de instellingen en zet 'TV gids voor blinden en slechtzienden' op Uit"
+    },
+    {
+        category: "tv",
+        question: "Welke uitspraak is juist over TOF filters?",
+        type: "single",
+        options: [
+            "Deze oude TOF filter met 2 ringen moet je altijd verwijderen",
+            "We hebben geen analoge TV meer, dus de TOF filter heeft geen enkele functie meer, je bent verplicht om alle TOF filters op de tap te verwijderen",
+            "Dit is de TOF-ITC filter, de enige juiste TOF filter die we nog mogen monteren"
+        ],
+        correct: 2,
+        feedback: "Dit is de TOF-ITC filter, de enige juiste TOF filter die we nog mogen monteren."
+    },
 
     // Telephone Questions
     {
@@ -1124,6 +1204,192 @@ const quizQuestions = [
         options: ["1324 W", "1424 W", "1524 W", "1624 W"],
         correct: 2,
         feedback: "P = I × U = 12 A × 127 V = 1524 W"
+    },
+
+    // Additional Technical Questions
+    {
+        category: "network",
+        question: "Het metalen deksel is infeite een soort 'kooi van Faraday'. De kern onder het vijsje noemen we in de elektronica een antenne. Een antenne kan straling zenden maar ook ontvangen. Een goed kontakt tussen de massa van de coax en het metalen deksel zal vermijden dat het catv doosje straling kan ontvangen. Kom je bij de klant een catv doosje tegen zonder metalen deksel, dan moet je een nieuw catv doosje plaatsen. Is deze uitleg waar of niet waar?",
+        type: "single",
+        options: ["True", "False"],
+        correct: 0,
+        feedback: "Dit is correct. Het metalen deksel werkt als Faraday kooi en voorkomt stoorsignalen."
+    },
+    {
+        category: "network",
+        question: "Welke uitspraak is juist over WO-NIU?",
+        type: "multiple",
+        options: [
+            "De WO-NIU is de enige NIU die je na een garage NIU extra mag plaatsen in de woonkamer",
+            "Een RG11 mag je nooit rechtstreeks aansluiten op een WO NIU, maak gewoon een 'overgang' naar RG6",
+            "De WO NIU mag je nooit inbouwen in vochtige muren. De reden is dat ze niet roestvrij zijn"
+        ],
+        correct: [1, 2],
+        feedback: "Een RG11 mag je nooit rechtstreeks aansluiten op een WO NIU, maak een overgang naar RG6. De WO NIU mag je nooit inbouwen in vochtige muren omdat ze niet roestvrij zijn."
+    },
+    {
+        category: "telephone",
+        question: "Een toestel met een RJ11 aansluiting is altijd een analoog toestel. Een toestel met alleen RJ45 aansluitingen is een digitaal toestel. Klopt deze uitspraak?",
+        type: "single",
+        options: ["True", "False"],
+        correct: 0,
+        feedback: "Dit klopt. RJ11 = analoog toestel, RJ45 alleen = digitaal toestel."
+    },
+    {
+        category: "network",
+        question: "Via Ants meet ik een TX=40dBmV en RX=0dBmV. Na een interne verhuis is mijn dropkabel 5 meter langer. Via ants meet ik nu...",
+        type: "single",
+        options: ["TX=41dBmV RX=0 dBmV", "TX=39dBmV RX=0dBmV", "TX=41dBmV RX=-1dBmV", "TX=40dBmV RX=1dBmV"],
+        correct: 2,
+        feedback: "5 meter extra kabel: TX stijgt met ~1dB (meer weerstand), RX daalt met ~1dB (meer verzwakking)."
+    },
+    {
+        category: "network",
+        question: "De TX moet liggen tussen 25dBmV en 47 dBmV.",
+        type: "single",
+        options: ["True", "False"],
+        correct: 0,
+        feedback: "Correct, de TX moet tussen 25dBmV en 47dBmV liggen."
+    },
+    {
+        category: "telephone",
+        question: "Na het vormen van het nummer 1244 krijg je te horen 'het opgegeven nummer is ...', dit is de lijnidentificatietest. Voor PXM is dit 1924 of soms #31*1924# (een robot stem zegt het juiste Prox. nummer).",
+        type: "single",
+        options: ["True", "False"],
+        correct: 0,
+        feedback: "Correct, 1244 is voor lijnidentificatietest, 1924 of #31*1924# voor PXM."
+    },
+    {
+        category: "network",
+        question: "Is deze kleurencode juist voor coax connectoren?",
+        type: "single",
+        options: ["True", "False"],
+        correct: 0,
+        feedback: "De kleurencode voor coax connectoren is correct."
+    },
+    {
+        category: "network",
+        question: "De paarse connector is voor RG59 met dubbel vlechtwerk, doorzichtig diëlektricum en geen folie. Het vlechtwerk moet je achteruit plooien alvorens de connector te bevestigen. Gebruik met je compressietang plunger A.",
+        type: "single",
+        options: ["True", "False"],
+        correct: 0,
+        feedback: "Correct, paarse connector voor RG59 met deze specificaties en plunger A."
+    },
+    {
+        category: "network",
+        question: "Via Ants zie je een foutmelding dat de modem op een verkeerde node staat. Welke actie onderneem je?",
+        type: "single",
+        options: [
+            "Deze modem staat op een verkeerde node, gebruik de probleemmelder",
+            "De modem registreert maar heeft een te hoge TX, kijk alle connecties na",
+            "Wegens te veel verbruik (telemeter) heeft de klant beperkt toegang tot het internet"
+        ],
+        correct: 0,
+        feedback: "Deze modem staat op een verkeerde node, gebruik de probleemmelder."
+    },
+    {
+        category: "network",
+        question: "Waarom moet je verplicht een PM sturen bij het verwijderen van een HP?",
+        type: "single",
+        options: [
+            "Door wegname van de HP filter kan er ingress op de lijn komen. Dankzij uw PM is de netwerktechnieker op de hoogte van de wegname van de HP filter. Op deze manier gaat de technieker veel tijd besparen",
+            "Dit moet enkel bij een HP 47, niet voor een HP 87 of HP 110",
+            "Bij wegname HP filter moet je een SOS Field coach sturen, uw FC zal je binnen de 10 minuten contacteren",
+            "Je bent helemaal niet verplicht om een PM te sturen"
+        ],
+        correct: 0,
+        feedback: "Door wegname van de HP filter kan er ingress op de lijn komen. Dankzij uw PM is de netwerktechnieker op de hoogte van de wegname van de HP filter."
+    },
+    {
+        category: "network",
+        question: "Ik meet met de Deviser downstream signalen, wat is er hier aan de hand?",
+        type: "single",
+        options: [
+            "De klant heeft een HP110 omdat hij duidelijk veel ingress veroorzaakt, melden via PM aan iHD",
+            "Het tweede upstream kanaal komt niet door, er staat dus een HP47 bij de klant",
+            "Het tweede downstream kanaal komt niet door, er staat dus een RPA12 bij de klant",
+            "Duidelijk een TOF-ITC"
+        ],
+        correct: 3,
+        feedback: "Dit is duidelijk een TOF-ITC filter die bepaalde kanalen blokkeert."
+    },
+    {
+        category: "network",
+        question: "De klant wenst geen wifi van Telenet maar heeft zijn eigen professionele draadloze router (merk Ubiquity). Welke modem geef je deze klant?",
+        type: "single",
+        options: [
+            "Kijk naar modempolicy (Hive), in dit geval dus een Marakele modem",
+            "De MV2+ want de klant heeft een duurdere router",
+            "MV2 modem (wifi5) is voldoende, zijn draadloze router zal wel wifi 6 hebben",
+            "De Mercury MV1 is meer dan voldoende"
+        ],
+        correct: 0,
+        feedback: "Kijk naar modempolicy (Hive), in dit geval dus een Marakele modem."
+    },
+    {
+        category: "general",
+        question: "Klant wenst een installatie met internet. De tap bevindt zich op 10 meter hoogte tegen de gevel van een oud herenhuis. De drop van de klant is met een AD filter aangesloten op de tap. Welke outcome selector gebruik je in SFX?",
+        type: "single",
+        options: ["Postponed", "OK", "Cancel (niet technische cancel)", "NOK"],
+        correct: 3,
+        feedback: "Je kan de AD nooit verwijderen op 10 meter hoogte (max 8 meter). Vraag een hoogtewerker via PM. Outcome = NOK"
+    },
+    {
+        category: "network",
+        question: "Een resultaat via Ants toont een foutmelding. Welke uitspraak is juist?",
+        type: "single",
+        options: [
+            "Klant heeft te veel data gedownload, hij heeft geen access meer tot het internet",
+            "De Modem heeft geen 'access' wegens een HP filter, gewoon HP 87 verwijderen",
+            "Verkeerde node, stuur een PM naar iHD"
+        ],
+        correct: 2,
+        feedback: "Verkeerde node, stuur een PM naar iHD."
+    },
+    {
+        category: "network",
+        question: "In dit voorbeeld zie je een 'open' coaxlijn. Door de marker juist voor de (2de) puls te zetten kan je linksonder aflezen waar de onderbreking zich voordoet. Bij een kortsluiting krijgen we een negatieve puls (naar beneden).",
+        type: "single",
+        options: ["True", "False"],
+        correct: 0,
+        feedback: "Dit is correct. Bij open lijn zie je de onderbreking, bij kortsluiting een negatieve puls."
+    },
+    {
+        category: "network",
+        question: "Ik mag de 'default gateway' van de router van de klant aanpassen. Alle gegevens hiervoor staan op het etiket van de router.",
+        type: "single",
+        options: ["True", "False"],
+        correct: 1,
+        feedback: "False. Je mag de default gateway van de klant zijn router NIET aanpassen."
+    },
+    {
+        category: "network",
+        question: "Je plaatst steeds een NIU met twee data-uitgangen (CM1-CM2) als de klant een MBP (modem met batterij) of BuB in gebruik heeft, of een NIU waar 2 modems op hangen.",
+        type: "single",
+        options: ["True", "False"],
+        correct: 0,
+        feedback: "True. Bij MBP/BuB of 2 modems gebruik je een NIU met twee data-uitgangen."
+    },
+    {
+        category: "tv",
+        question: "Een digibox/digicorder moet steeds achter de WM staan of via een switch. Een TV box mag achter de router van de klant staan (als router IPv6 compatible is).",
+        type: "single",
+        options: ["True", "False"],
+        correct: 0,
+        feedback: "True. Digibox/digicorder achter WM, TV box mag achter klant router als IPv6 compatible."
+    },
+    {
+        category: "network",
+        question: "Ik kom bij een installatie met allemaal 'losse' en slecht gemonteerde connectoren, ik vervang deze door perfect gemonteerde connectoren en sleutelvast. Wat is nu het gevolg van deze actie?",
+        type: "single",
+        options: [
+            "TX en RX gaan niet wijzigen, alleen de SNR zal beter worden",
+            "TX stijgt, RX daalt",
+            "TX daalt, RX stijgt",
+            "Zowel TX als RX zullen stijgen, uiteraard de SNR ook"
+        ],
+        correct: 2,
+        feedback: "TX daalt, RX stijgt. Betere connectoren = minder verlies = lagere TX en hogere RX."
     }
 ];
 
@@ -1164,12 +1430,12 @@ function startQuiz() {
         const categories = ['general', 'electricity', 'network', 'wifi', 'tv', 'telephone', 'calculation'];
         const questionsPerCategory = {
             'general': 6,
-            'electricity': 7,
-            'network': 6,
-            'wifi': 5,
-            'tv': 2,
-            'telephone': 2,
-            'calculation': 5
+            'electricity': 8,
+            'network': 8,
+            'wifi': 7,
+            'tv': 6,
+            'telephone': 3,
+            'calculation': 6
         };
         
         categories.forEach(cat => {
